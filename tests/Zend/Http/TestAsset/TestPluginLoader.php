@@ -20,8 +20,6 @@
  * @version    $Id: JsonTest.php 12081 2008-10-22 19:07:55Z norm2782 $
  */
 
-require_once 'Zend/Loader/PluginLoader.php';
-
 /**
  * @category   Zend
  * @package    Zend_Http_UserAgent

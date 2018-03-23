@@ -20,7 +20,6 @@
  * @version    $Id: JsonTest.php 12081 2008-10-22 19:07:55Z norm2782 $
  */
 
-require_once 'Zend/Config.php';
 require_once 'Zend/Http/UserAgent.php';
 require_once 'Zend/Http/UserAgent/Mobile.php';
 require_once 'Zend/Http/UserAgent/Storage/NonPersistent.php';

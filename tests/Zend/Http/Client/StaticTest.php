@@ -369,8 +369,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit\Framework\TestCase
      */
     public function testConfigSetAsZendConfig()
     {
-        require_once 'Zend/Config.php';
-
         $config = new Zend_Config(array(
             'timeout'  => 400,
             'nested'   => array(
