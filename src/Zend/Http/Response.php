@@ -343,8 +343,8 @@ class Zend_Http_Response
     /**
      * Get a specific header as string, or null if it is not set
      *
-     * @param string$header
-     * @return string|array|null
+     * @param string $header
+     * @return string|null
      */
     public function getHeader($header)
     {

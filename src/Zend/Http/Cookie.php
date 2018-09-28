@@ -222,6 +222,7 @@ class Zend_Http_Cookie
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
         if (is_string($uri)) {
+            /** @var Zend_Uri_Http $uri */
             $uri = Zend_Uri_Http::factory($uri);
         }
 
