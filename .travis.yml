@@ -22,9 +22,9 @@ install:
   - travis_retry composer update --no-interaction --prefer-source $COMPOSER_ARGS
 
 stages:
-  - test
   - style check
   - phpstan analysis
+  - test
   - test with coverage
 
 before_script:
@@ -54,13 +54,11 @@ jobs:
 
     - stage: style check
       php: 7.2
-      env: TMPDIR=/tmp USE_XDEBUG=false
       script:
         - composer style-check
 
     - stage: phpstan analysis
       php: 7.2
-      env: TMPDIR=/tmp USE_XDEBUG=false
       script:
         - composer phpstan
 
