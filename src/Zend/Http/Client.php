@@ -153,7 +153,7 @@ class Zend_Http_Client
     /**
      * The raw post data to send. Could be set by setRawData($data, $enctype).
      *
-     * @var string|resource
+     * @var string|resource|null
      */
     protected $raw_post_data = null;
 
@@ -1058,8 +1058,10 @@ class Zend_Http_Client
                 if ($streamMetaData['seekable']) {
                     rewind($stream);
                 }
-                // cleanup the adapter
-                $this->adapter->setOutputStream(null);
+                // cleanup the adapter (only Curl, Stream and Socket adapters have this method)
+                if (method_exists($this->adapter, 'setOutputStream')) {
+                    $this->adapter->setOutputStream(null);
+                }
                 $response = Zend_Http_Response_Stream::fromStream($response, $stream);
                 $response->setStreamName($this->_stream_name);
                 if (!is_string($this->config['output_stream'])) {
@@ -1189,6 +1191,7 @@ class Zend_Http_Client
 
         // Load cookies from cookie jar
         if (isset($this->cookiejar)) {
+            /** @var string $cookstr */
             $cookstr = $this->cookiejar->getMatchingCookies(
                 $this->uri,
                 true,

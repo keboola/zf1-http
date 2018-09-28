@@ -308,7 +308,7 @@ class Zend_Http_UserAgent_Mobile extends Zend_Http_UserAgent_AbstractDevice
      * Retrieve beginning clause of user agent
      *
      * @param  string $userAgent
-     * @return string
+     * @return bool
      */
     public static function userAgentStart($userAgent)
     {
