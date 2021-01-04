@@ -424,7 +424,7 @@ class Zend_Http_Client_Adapter_Curl implements Zend_Http_Client_Adapter_Interfac
         }
 
         $request = curl_getinfo($this->_curl, CURLINFO_HEADER_OUT);
-        $request .= $body;
+        $request .=  is_string($body) ? $body : json_encode($body);
 
         if (empty($this->_response)) {
             throw new Zend_Http_Client_Exception('Error in cURL request: ' . curl_error($this->_curl));
