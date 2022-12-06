@@ -239,7 +239,7 @@ class Zend_Http_Client
      * This variable is populated the first time _detectFileMimeType is called
      * and is then reused on every call to this method
      *
-     * @var resource
+     * @var resource|false
      */
     protected static $_fileInfoDb = null;
 
@@ -415,7 +415,7 @@ class Zend_Http_Client
         }
 
         // Make sure the name is valid if we are in strict mode
-        if ($this->config['strict'] && (! preg_match('/^[a-zA-Z0-9-]+$/', $name))) {
+        if ($this->config['strict'] && (! preg_match('/^[a-zA-Z0-9-_]+$/', $name))) {
             throw new Zend_Http_Client_Exception("{$name} is not a valid HTTP header name");
         }
 
@@ -579,7 +579,7 @@ class Zend_Http_Client
                 $this->getUri()->setUsername('');
                 $this->getUri()->setPassword('');
             }
-            // Else, set up authentication
+        // Else, set up authentication
         } else {
             // Check we got a proper authentication type
             if (! defined('self::AUTH_' . strtoupper($type))) {
@@ -1083,7 +1083,6 @@ class Zend_Http_Client
 
             // If we got redirected, look for the Location header
             if ($response->isRedirect() && ($location = $response->getHeader('location'))) {
-
                 // Avoid problems with buggy servers that add whitespace at the
                 // end of some headers (See ZF-11283)
                 $location = trim($location);
@@ -1102,7 +1101,6 @@ class Zend_Http_Client
                     $this->setHeaders('host', null);
                     $this->setUri($location);
                 } else {
-
                     // Split into path and query and set the query
                     if (strpos($location, '?') !== false) {
                         list($location, $query) = explode('?', $location, 2);
@@ -1474,7 +1472,7 @@ class Zend_Http_Client
                 $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
                 break;
 
-            //case self::AUTH_DIGEST:
+                //case self::AUTH_DIGEST:
                 /**
                  * @todo Implement digest authentication
                  */
@@ -1510,7 +1508,6 @@ class Zend_Http_Client
         $parameters = array();
 
         foreach ($parray as $name => $value) {
-
             // Calculate array key
             if ($prefix) {
                 if (is_int($name)) {
